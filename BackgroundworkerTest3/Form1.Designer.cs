@@ -1,5 +1,5 @@
 ﻿
-namespace BackgroundworkerTest3
+namespace BackgroundWorkerTest3
 {
     partial class Form1
     {
@@ -29,13 +29,51 @@ namespace BackgroundworkerTest3
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.button1 = new System.Windows.Forms.Button();
+            this._bw = new System.ComponentModel.BackgroundWorker();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(747, 38);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 50);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // _bw
+            // 
+            this._bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this._bw_DoWork);
+            this._bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this._bw_ProgressChanged);
+            this._bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this._bw_RunWorkerCompleted);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 432);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(846, 23);
+            this.progressBar1.TabIndex = 1;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(880, 467);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.button1);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button button1;
+        private System.ComponentModel.BackgroundWorker _bw;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
