@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace BackgroundWorkerTest3
 {
@@ -15,6 +16,13 @@ namespace BackgroundWorkerTest3
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void InitializeBackgroundWorker()
+        {
+            _bw.DoWork += new DoWorkEventHandler(_bw_DoWork);
+            _bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_bw_RunWorkerCompleted);
+            _bw.ProgressChanged += new ProgressChangedEventHandler(_bw_ProgressChanged);
         }
 
         private void _bw_DoWork(object sender, DoWorkEventArgs e)
@@ -28,6 +36,11 @@ namespace BackgroundWorkerTest3
         }
 
         private void _bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }
