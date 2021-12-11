@@ -28,24 +28,57 @@ namespace BackgroundWorkerTest3
 
         private void _bw_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            BackgroundWorker worker = sender as BackgroundWorker;
+            if (this.progressBar1.Value == 0)
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                    if (worker.CancellationPending == true)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    else
+                    {
+                        // Perform a time consuming operation and report progress.
+                        System.Threading.Thread.Sleep(500);
+                        worker.ReportProgress(i * 10);
+                    }
+                    Console.WriteLine("this.progressBar1.Value:{0}", this.progressBar1.Value);
+                    //label1.Text = Convert.ToString(this.progressBar1.Value)+ "%";
+                }
+            }
+            Console.WriteLine("this.progressBar1.Value:{0}", this.progressBar1.Value);
         }
 
         private void _bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            this.progressBar1.Value = e.ProgressPercentage;
         }
 
         private void _bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            if (e.Cancelled == true)
+            {
+                //resultLabel.Text = "Canceled!";
+                //label1.Text = "Cancelled";
+            }
+            else if (e.Error != null)
+            {
+                //resultLabel.Text = "Error: " + e.Error.Message;
+            }
+            else
+            {
+                //resultLabel.Text = "Done!";
+                //label1.Text = "100%";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             _bw.WorkerReportsProgress = true;
             _bw.WorkerSupportsCancellation = true;
-            StreamReader _sr = new StreamReader(Application.StartupPath + "\\" + "Dell Data +5c_0714_00.csv");
+            StreamReader _sr = new StreamReader(Application.StartupPath + "\\" + "CSV Path");
             Console.WriteLine("button click");
             Console.WriteLine("g_dellCnt:{0}", g_dellCnt);
             //if (_bw.IsBusy != true)
